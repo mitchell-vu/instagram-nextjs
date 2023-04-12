@@ -1,0 +1,23 @@
+@import './layout.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overscroll-behavior-y: none;
+}
+
+body {
+  color: theme('colors.neutral.800');
+}
+
+// background-image: linear-gradient(to right,rgb(var(--gradient-purple)),rgb(var(--gradient-yellow)),rgb(var(--gradient-orange)),rgb(var(--gradient-pink)),rgb(var(--gradient-lavender)),rgb(var(--gradient-purple)),rgb(var(--gradient-yellow)));

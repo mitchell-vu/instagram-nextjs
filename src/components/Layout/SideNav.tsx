@@ -1,34 +1,93 @@
-import * as React from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Popover, Transition } from '@headlessui/react';
-import { signOut } from 'firebase/auth';
 import classNames from 'classnames';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import * as React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import {
-  InstagramLogo,
-  HomeLineSvg,
-  HomeFillSvg,
-  MessengerLineSvg,
-  MessengerFillSvg,
-  HamburgerSvg,
   HamburgerFillSvg,
+  HamburgerSvg,
+  HeartFillSvg,
+  HeartSvg,
+  HomeFillSvg,
+  HomeLineSvg,
+  InstagramLogo,
+  MessengerFillSvg,
+  MessengerLineSvg,
+  SearchFillSvg,
+  SearchSvg,
+  SquarePlusFillSvg,
+  SquarePlusSvg,
 } from '@/assets/svg';
-import SideNavLink from './SideNavLink';
 import { auth } from '@/config/firebase';
-
-const NAV_LINKS = [
-  { href: '/', label: 'Home', icon: <HomeLineSvg />, activeIcon: <HomeFillSvg /> },
-  { href: '/direct', label: 'Messages', icon: <MessengerLineSvg />, activeIcon: <MessengerFillSvg /> },
-];
+import Image from 'next/image';
+import MoreMenu from './MoreMenu';
+import SideNavLink from './SideNavLink';
 
 interface ISideNavProps {}
 
 const SideNav: React.FC<ISideNavProps> = () => {
   const router = useRouter();
+  const [loggedInUser] = useAuthState(auth);
+
+  const NAV_LINKS = React.useMemo(
+    () => [
+      { href: '/', pathname: '/', label: 'Home', icon: <HomeLineSvg />, activeIcon: <HomeFillSvg /> },
+      {
+        label: 'Search',
+        icon: <SearchSvg />,
+        activeIcon: <SearchFillSvg />,
+      },
+      {
+        href: '/direct',
+        pathname: '/direct',
+        label: 'Messages',
+        icon: <MessengerLineSvg />,
+        activeIcon: <MessengerFillSvg />,
+      },
+      {
+        label: 'Notifications',
+        icon: <HeartSvg />,
+        activeIcon: <HeartFillSvg />,
+      },
+      {
+        label: 'Create',
+        icon: <SquarePlusSvg />,
+        activeIcon: <SquarePlusFillSvg />,
+      },
+      {
+        href: `/${loggedInUser?.email}`,
+        label: 'Profile',
+        pathname: '/[username]',
+        icon: (
+          <Image
+            src={loggedInUser?.photoURL!}
+            alt={loggedInUser?.displayName!}
+            width={24}
+            height={24}
+            className="rounded-full"
+          />
+        ),
+        activeIcon: (
+          <div className="relative">
+            <div className="absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 transform rounded-full border-2 border-black" />
+            <Image
+              src={loggedInUser?.photoURL!}
+              alt={loggedInUser?.displayName!}
+              width={24}
+              height={24}
+              className="rounded-full"
+            />
+          </div>
+        ),
+      },
+    ],
+    [loggedInUser],
+  );
 
   return (
-    <div className="fixed flex h-screen w-nav-medium flex-col border-r border-neutral-200 bg-white px-3 pb-5 pt-2">
+    <div className="fixed flex h-screen w-nav-medium flex-col border-r border-neutral-200 bg-white px-3 pb-5 pt-2 2xl:w-nav-wide">
       <div className="mb-5 px-3 pb-4 pt-6">
         <Link href="/" className="active:opacity-50">
           <InstagramLogo className="mt-2" />
@@ -39,7 +98,7 @@ const SideNav: React.FC<ISideNavProps> = () => {
         <ul className="flex flex-col">
           {NAV_LINKS.map((link, index) => (
             <li key={index}>
-              <SideNavLink link={link} isActive={router.pathname === link.href} />
+              <SideNavLink link={link} isActive={router.pathname === link.pathname} />
             </li>
           ))}
         </ul>
@@ -49,7 +108,7 @@ const SideNav: React.FC<ISideNavProps> = () => {
         <Popover className="relative">
           {({ open }) => (
             <>
-              <Popover.Button className="group relative my-0.5 flex w-full flex-row items-center gap-4 rounded-3xl p-3 outline-none transition hover:bg-neutral-50 active:opacity-50">
+              <Popover.Button className="group relative my-0.5 flex w-full flex-row items-center gap-4 rounded-lg p-3 outline-none transition hover:bg-neutral-100 active:opacity-50">
                 <div className="h-6 w-6 transform transition group-hover:scale-105 group-active:scale-95">
                   {open ? <HamburgerFillSvg /> : <HamburgerSvg />}
                 </div>
@@ -64,12 +123,8 @@ const SideNav: React.FC<ISideNavProps> = () => {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-                <Popover.Panel className="absolute bottom-16 z-50 transform">
-                  <div className="w-60 overflow-hidden rounded bg-white drop-shadow-md">
-                    <button onClick={() => signOut(auth)} className="px-4 py-3">
-                      Log out
-                    </button>
-                  </div>
+                <Popover.Panel role="dialog" className="absolute bottom-16 z-50 transform">
+                  <MoreMenu />
                 </Popover.Panel>
               </Transition>
             </>

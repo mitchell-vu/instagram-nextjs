@@ -5,7 +5,7 @@ import Input from './Input';
 
 interface IConversationProps {}
 
-const Conversation: React.FunctionComponent<IConversationProps> = () => {
+const Conversation: React.FC<IConversationProps> = () => {
   return (
     <>
       <Header />

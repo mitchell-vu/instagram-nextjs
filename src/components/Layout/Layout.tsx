@@ -13,7 +13,6 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
         <SideNav />
 
         <main className="ml-60 flex h-full w-full items-center justify-center p-5">{children}</main>
-        <div></div>
       </div>
     </div>
   );
