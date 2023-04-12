@@ -3,7 +3,7 @@ import { EmojiSvg, PhotoSvg, HeartSvg } from '@/assets/svg';
 
 interface IInputProps {}
 
-const Input: React.FunctionComponent<IInputProps> = (props) => {
+const Input: React.FC<IInputProps> = (props) => {
   return (
     <div className="p-5">
       <div className="flex flex-row items-center rounded-3xl border border-neutral-200 pl-3 pr-2">

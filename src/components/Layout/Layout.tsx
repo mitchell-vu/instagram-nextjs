@@ -6,16 +6,16 @@ interface ILayoutProps {
   children: React.ReactNode;
 }
 
-const Layout: React.FunctionComponent<ILayoutProps> = ({ children }) => {
+const Layout: React.FC<ILayoutProps> = ({ children }) => {
   return (
-    <main className="fixed h-screen w-screen bg-neutral-50">
+    <div className="fixed h-screen w-screen bg-neutral-50">
       <div className="relative flex h-screen w-screen flex-row items-stretch bg-neutral-50">
         <SideNav />
 
-        <div className="ml-60 flex h-full w-full items-center justify-center p-5">{children}</div>
+        <main className="ml-60 flex h-full w-full items-center justify-center p-5">{children}</main>
         <div></div>
       </div>
-    </main>
+    </div>
   );
 };
 
