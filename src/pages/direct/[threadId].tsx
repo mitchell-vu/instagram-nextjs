@@ -1,13 +1,12 @@
 import { Layout } from '@/components';
-import DirectBox from '@/components/Chat/ChatBox';
-import DirectThreadMessages from '@/components/Chat/Feed/DirectThreadMessages';
+import DirectBox from '@/components/Chat/DirectBox';
+import DirectThreadMessages from '@/components/Chat/DirectThread/DirectThreadMessages';
 import Head from 'next/head';
 import * as React from 'react';
 import { NextPageWithLayout } from '@/pages/_app';
 // import { GetServerSideProps } from 'next';
-import { doc, getDoc, getDocs } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
-import { generateQueryGetMessages, transformMessage } from '@/utils/getMessagesInConversation';
 import { Conversation as IConversation, IMessage } from '@/types';
 import { useRouter } from 'next/router';
 
@@ -20,7 +19,6 @@ const DirectConversation: NextPageWithLayout<IDirectConversationProps> = () => {
   const router = useRouter();
   const { threadId } = router.query;
   const [conversation, setConversation] = React.useState<IConversation | null>(null);
-  const [messages, setMessages] = React.useState<IMessage[] | null>(null);
 
   React.useEffect(() => {
     const fetch = async () => {
@@ -31,17 +29,13 @@ const DirectConversation: NextPageWithLayout<IDirectConversationProps> = () => {
       const conversationSnapshot = await getDoc(conversationRef);
 
       // get all messages between logged in user and recipient in this conversation
-      const queryMessages = generateQueryGetMessages(conversationId as IConversation['id']);
-      const messagesSnapshot = await getDocs(queryMessages);
-      setMessages(messagesSnapshot.docs.map((messageDoc) => transformMessage(messageDoc)));
-
       setConversation(conversationSnapshot.data() as IConversation);
     };
 
     fetch();
   }, [threadId]);
 
-  return conversation && messages && <DirectThreadMessages thread={conversation} messages={messages} />;
+  return conversation && <DirectThreadMessages thread={conversation} />;
 };
 
 DirectConversation.getLayout = function getLayout(page: React.ReactElement) {

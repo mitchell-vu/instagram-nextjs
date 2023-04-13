@@ -1,20 +1,23 @@
 import * as React from 'react';
 import Image from 'next/image';
+import { AppUser, IMessage } from '@/types';
+import { User } from 'firebase/auth';
+import BlankAvatar from '@/assets/images/blank-avatar.jpeg';
 
 interface IMessageProps {
   endSequence: boolean;
   isMyself: boolean;
+  message: IMessage;
+  sendUser: User | AppUser | null | undefined;
 }
 
-const Message: React.FC<IMessageProps> = ({ endSequence, isMyself }) => {
+const Message: React.FC<IMessageProps> = ({ endSequence, isMyself, message, sendUser }) => {
   return isMyself ? (
     <div className="flex items-end justify-start">
       <div className="mb-2 mr-2 h-6 w-6" />
       <div className="flex flex-1 flex-col">
         <div className="mb-2 max-w-[236px] self-end rounded-3xl border border-transparent bg-neutral-100 p-4 text-sm">
-          <div className="-my-1">
-            dm nôn xong mệt thật dm nôn xong mệt thật dm nôn xong mệt thật dm nôn xong mệt thật dm nôn xong mệt thật
-          </div>
+          <div className="-my-1">{message.text}</div>
         </div>
       </div>
     </div>
@@ -23,7 +26,7 @@ const Message: React.FC<IMessageProps> = ({ endSequence, isMyself }) => {
       {endSequence ? (
         <a href="#" className="mb-2 mr-2 h-6 w-6 overflow-hidden rounded-full">
           <Image
-            src="https://instagram.fhan19-1.fna.fbcdn.net/v/t51.2885-19/340006043_176949998552507_4553709423859098329_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fhan19-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=CTgGBr1hnQUAX-3EzW1&edm=AAAAAAABAAAA&ccb=7-5&oh=00_AfBHlT63tLyIOVxv5D9AG_KgY0Cqkxzzr02vPkYcuAKhsw&oe=6438A086&_nc_sid=022a36"
+            src={sendUser?.photoURL ?? BlankAvatar}
             width={24}
             height={24}
             className="h-full w-full bg-black"
@@ -35,7 +38,7 @@ const Message: React.FC<IMessageProps> = ({ endSequence, isMyself }) => {
       )}
       <div className="flex flex-1 flex-col">
         <div className="mb-2 max-w-[236px] self-start rounded-3xl border border-neutral-200 p-4 text-sm">
-          <div className="-my-1">dm nôn xong mệt thật</div>
+          <div className="-my-1">{message.text}</div>
         </div>
       </div>
     </div>

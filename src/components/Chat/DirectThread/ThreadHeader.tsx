@@ -4,12 +4,12 @@ import { InfoSvg } from '@/assets/svg';
 import { AppUser } from '@/types';
 import BlankAvatar from '@/assets/images/blank-avatar.jpeg';
 
-interface IHeaderProps {
+interface IThreadHeaderProps {
   recipient: AppUser | undefined;
   recipientEmail?: AppUser['email'];
 }
 
-const Header: React.FC<IHeaderProps> = ({ recipient, recipientEmail }) => {
+const ThreadHeader: React.FC<IThreadHeaderProps> = ({ recipient, recipientEmail }) => {
   return (
     <header className="h-14 border-b border-neutral-200 px-5">
       <div className="flex h-full flex-row items-center justify-between">
@@ -31,4 +31,4 @@ const Header: React.FC<IHeaderProps> = ({ recipient, recipientEmail }) => {
   );
 };
 
-export default Header;
+export default ThreadHeader;

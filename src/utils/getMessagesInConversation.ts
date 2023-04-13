@@ -1,8 +1,8 @@
 import { collection, DocumentData, orderBy, query, QueryDocumentSnapshot, Timestamp, where } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { IMessage } from '../types';
+import { Conversation, IMessage } from '../types';
 
-export const generateQueryGetMessages = (conversationId?: string) =>
+export const generateQueryGetMessages = (conversationId?: Conversation['id']) =>
   query(collection(db, 'messages'), where('thread_id', '==', conversationId), orderBy('sent_at', 'asc'));
 
 export const transformMessage = (message: QueryDocumentSnapshot<DocumentData>) =>

@@ -1,6 +1,6 @@
 export { default as Layout } from './Layout/Layout';
 
-export { default as Header } from './Chat/Feed/Header';
-export { default as ThreadList } from './Chat/Conversations/ThreadList';
-export { default as Message } from './Chat/Feed/Message';
-export { default as Input } from './Chat/Feed/Input';
+export { default as ThreadHeader } from './Chat/DirectThread/ThreadHeader';
+export { default as ThreadList } from './Chat/ThreadList/ThreadList';
+export { default as Message } from './Chat/DirectThread/Message';
+export { default as Input } from './Chat/DirectThread/Input';

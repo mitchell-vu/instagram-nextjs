@@ -2,7 +2,7 @@ import Head from 'next/head';
 import * as React from 'react';
 
 import { Layout } from '@/components';
-import DirectBox from '@/components/Chat/ChatBox';
+import DirectBox from '@/components/Chat/DirectBox';
 import { NextPageWithLayout } from '@/pages/_app';
 
 interface IDirectBoxProps {}

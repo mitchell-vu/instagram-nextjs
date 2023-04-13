@@ -7,7 +7,7 @@ import { ThreadList } from '@/components';
 import NewThreadDialog from '@/components/Chat/NewThreadDialog';
 import { auth, db } from '@/config/firebase';
 import { Conversation as IConversation } from '@/types';
-import DirectNull from './Feed/DirectNull';
+import DirectNull from './DirectThread/DirectNull';
 import { useRouter } from 'next/router';
 
 interface IDirectBoxProps {
