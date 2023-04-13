@@ -8,8 +8,18 @@ import LoadingScreen from '@/components/Loading/LoadingScreen';
 
 import '@/styles/globals.scss';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { NextPage } from 'next';
 
-export default function App({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  // eslint-disable-next-line
+  getLayout?: (page: React.ReactElement) => React.ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [loggedInUser, loading] = useAuthState(auth);
 
   React.useEffect(() => {
@@ -38,5 +48,8 @@ export default function App({ Component, pageProps }: AppProps) {
   if (loading) return <LoadingScreen />;
   if (!loggedInUser) return <Login />;
 
-  return <Component {...pageProps} />;
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout ?? ((page) => page);
+
+  return getLayout(<Component {...pageProps} />);
 }

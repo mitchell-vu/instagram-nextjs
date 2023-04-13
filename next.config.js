@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['d1j8r0kxyu9tj8.cloudfront.net', 'lh3.googleusercontent.com', 'instagram.fhan19-1.fna.fbcdn.net'],
+    domains: [
+      'd1j8r0kxyu9tj8.cloudfront.net',
+      'lh3.googleusercontent.com',
+      'instagram.fhan19-1.fna.fbcdn.net',
+      'scontent-tpe1-1.cdninstagram.com',
+    ],
   },
 
   webpack(config) {

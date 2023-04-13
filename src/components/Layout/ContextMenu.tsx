@@ -3,9 +3,9 @@ import { signOut } from 'firebase/auth';
 import { auth } from '@/config/firebase';
 import { ChevronUpSvg, SunSvg } from '@/assets/svg';
 
-interface IMoreMenuProps {}
+interface IContextMenuProps {}
 
-const MoreMenu: React.FC<IMoreMenuProps> = () => {
+const ContextMenu: React.FC<IContextMenuProps> = () => {
   const signOutHandler = () => {
     signOut(auth);
   };
@@ -18,7 +18,7 @@ const MoreMenu: React.FC<IMoreMenuProps> = () => {
           <span className="grow text-left">Switch appearance</span>
           <ChevronUpSvg className="ml-3 h-3 w-3 rotate-90 transform fill-gray-300" />
         </button>
-        <div className="-mx-2 my-2 h-[0.5px] bg-gray-100" />
+        <div className="-mx-2 my-2 h-[0.5px] bg-gray-200" />
         <button
           onClick={signOutHandler}
           className="flex justify-start truncate rounded-lg bg-white p-4 text-sm transition hover:bg-gray-100"
@@ -34,4 +34,4 @@ const MoreMenu: React.FC<IMoreMenuProps> = () => {
   );
 };
 
-export default MoreMenu;
+export default ContextMenu;

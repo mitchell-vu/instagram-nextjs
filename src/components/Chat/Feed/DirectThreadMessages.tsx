@@ -2,13 +2,20 @@ import * as React from 'react';
 import Header from './Header';
 import Message from './Message';
 import Input from './Input';
+import { Conversation as IConversation, IMessage } from '@/types';
+import { useRecipient } from '@/hooks/useRecipient';
 
-interface IConversationProps {}
+interface IConversationProps {
+  thread: IConversation;
+  messages: IMessage[];
+}
 
-const Conversation: React.FC<IConversationProps> = () => {
+const DirectThreadMessages: React.FC<IConversationProps> = ({ thread }) => {
+  const { recipient, recipientEmail } = useRecipient(thread.users);
+
   return (
     <>
-      <Header />
+      <Header recipient={recipient!} recipientEmail={recipientEmail} />
       <div className="flex flex-1 flex-col overflow-hidden">
         <div className="flex-1 overflow-y-auto overflow-x-hidden">
           <div className="p-5 pb-0">
@@ -30,4 +37,4 @@ const Conversation: React.FC<IConversationProps> = () => {
   );
 };
 
-export default Conversation;
+export default DirectThreadMessages;

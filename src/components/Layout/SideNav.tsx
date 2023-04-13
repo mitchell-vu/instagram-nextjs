@@ -22,7 +22,7 @@ import {
 } from '@/assets/svg';
 import { auth } from '@/config/firebase';
 import Image from 'next/image';
-import MoreMenu from './MoreMenu';
+import ContextMenu from './ContextMenu';
 import SideNavLink from './SideNavLink';
 
 interface ISideNavProps {}
@@ -96,11 +96,16 @@ const SideNav: React.FC<ISideNavProps> = () => {
 
       <nav className="grow">
         <ul className="flex flex-col">
-          {NAV_LINKS.map((link, index) => (
-            <li key={index}>
-              <SideNavLink link={link} isActive={router.pathname === link.pathname} />
-            </li>
-          ))}
+          {NAV_LINKS.map((link, index) => {
+            const isActive =
+              (router.pathname === '/' || link.pathname !== '/') && router.pathname.includes(link.pathname!);
+
+            return (
+              <li key={index}>
+                <SideNavLink link={link} isActive={isActive} />
+              </li>
+            );
+          })}
         </ul>
       </nav>
 
@@ -124,7 +129,7 @@ const SideNav: React.FC<ISideNavProps> = () => {
                 leaveTo="opacity-0 translate-y-1"
               >
                 <Popover.Panel role="dialog" className="absolute bottom-16 z-50 transform">
-                  <MoreMenu />
+                  <ContextMenu />
                 </Popover.Panel>
               </Transition>
             </>

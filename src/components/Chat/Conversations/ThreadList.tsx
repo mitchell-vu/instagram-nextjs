@@ -4,6 +4,7 @@ import { Conversation } from '@/types';
 import ThreadListItemSkeleton from './ThreadListItemSkeleton';
 import ThreadListItem from './ThreadListItem';
 import ThreadListHeader from './ThreadListHeader';
+import { useRouter } from 'next/router';
 
 interface IThreadListProps {
   threads?: Conversation[];
@@ -14,6 +15,13 @@ interface IThreadListProps {
 }
 
 const ThreadList: React.FC<IThreadListProps> = ({ threads, selectedRecipient, onSelect, onCreateNewThread }) => {
+  const router = useRouter();
+
+  const selectThreadHandler = (id: Conversation['id']) => {
+    onSelect(id);
+    router.push(`/direct/${id}`);
+  };
+
   return (
     <aside className="flex h-full w-[350px] flex-col overflow-hidden border-r border-neutral-200">
       <ThreadListHeader onCreateNewThread={onCreateNewThread} />
@@ -26,7 +34,7 @@ const ThreadList: React.FC<IThreadListProps> = ({ threads, selectedRecipient, on
                   key={thread.id}
                   thread={thread}
                   isOpended={thread.id === selectedRecipient}
-                  onSelect={() => onSelect(thread.id)}
+                  onSelect={() => selectThreadHandler(thread.id)}
                 />
               ))
             : [...Array(5)].map((_, i) => <ThreadListItemSkeleton key={i} />)}

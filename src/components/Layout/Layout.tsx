@@ -8,12 +8,12 @@ interface ILayoutProps {
 
 const Layout: React.FC<ILayoutProps> = ({ children }) => {
   return (
-    <div className="fixed h-screen w-screen bg-neutral-50">
-      <div className="relative flex h-screen w-screen flex-row items-stretch bg-neutral-50">
-        <SideNav />
+    <div className="relative flex h-screen w-screen flex-row items-stretch bg-neutral-50">
+      <SideNav />
 
-        <main className="ml-60 flex h-full w-full items-center justify-center p-5">{children}</main>
-      </div>
+      <main className="ml-nav-medium flex h-full min-h-screen w-full items-center justify-center overflow-x-hidden">
+        {children}
+      </main>
     </div>
   );
 };

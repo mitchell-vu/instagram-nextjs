@@ -13,7 +13,7 @@ export interface AppUser {
 
 export interface IMessage {
   id: string;
-  conversation_id: string;
+  thread_id: string;
   text: string;
   sent_at: string;
   user: string;

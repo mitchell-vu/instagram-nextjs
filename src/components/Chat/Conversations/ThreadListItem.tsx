@@ -18,7 +18,7 @@ const ThreadListItem: React.FC<IThreadListItemProps> = ({ isOpended, onSelect, t
     <button
       onClick={onSelect}
       className={classNames('group w-full transition hover:bg-neutral-100', {
-        'bg-neutral-100 hover:bg-neutral-200': isOpended,
+        'bg-neutral-100': isOpended,
       })}
     >
       <div className="flex w-full flex-row items-center gap-3 px-5 py-2 group-active:opacity-50">
