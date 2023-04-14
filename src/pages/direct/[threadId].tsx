@@ -35,21 +35,23 @@ const DirectConversation: NextPageWithLayout<IDirectConversationProps> = () => {
     fetch();
   }, [threadId]);
 
-  return conversation && <DirectThreadMessages thread={conversation} />;
-};
-
-DirectConversation.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <>
       <Head>
         <title>Instagram • Chats</title>
       </Head>
-      <Layout>
-        <div className="fixed flex h-full w-full items-center justify-center p-5">
-          <DirectBox>{page}</DirectBox>
-        </div>
-      </Layout>
+      {conversation && <DirectThreadMessages thread={conversation} />}
     </>
+  );
+};
+
+DirectConversation.getLayout = function getLayout(page: React.ReactElement) {
+  return (
+    <Layout>
+      <div className="flex h-full w-full items-center justify-center p-5">
+        <DirectBox>{page}</DirectBox>
+      </div>
+    </Layout>
   );
 };
 

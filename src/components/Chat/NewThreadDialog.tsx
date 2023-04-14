@@ -11,7 +11,7 @@ interface INewThreadDialogProps {
   onCreateThread: (email: string) => void;
 }
 
-const NewThreadDialog: React.FunctionComponent<INewThreadDialogProps> = ({ isOpen, closeModal, onCreateThread }) => {
+const NewThreadDialog: React.FC<INewThreadDialogProps> = ({ isOpen, closeModal, onCreateThread }) => {
   const [loggedInUser] = useAuthState(auth);
   const [recipientEmail, setRecipientEmail] = React.useState('');
 

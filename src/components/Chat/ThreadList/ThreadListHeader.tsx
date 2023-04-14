@@ -7,7 +7,7 @@ interface IThreadListHeaderProps {
   onCreateNewThread: () => void;
 }
 
-const ThreadListHeader: React.FunctionComponent<IThreadListHeaderProps> = ({ onCreateNewThread }) => {
+const ThreadListHeader: React.FC<IThreadListHeaderProps> = ({ onCreateNewThread }) => {
   const [loggedInUser] = useAuthState(auth);
 
   return (

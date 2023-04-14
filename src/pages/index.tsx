@@ -1,7 +1,10 @@
+import * as React from 'react';
 import Head from 'next/head';
-import { Layout } from '@/components';
 
-export default function Home() {
+import { Layout } from '@/components';
+import { NextPageWithLayout } from '@/pages/_app';
+
+const Home: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -9,9 +12,13 @@ export default function Home() {
         <meta name="description" content="Instagram Direct Clone" />
       </Head>
 
-      <Layout>
-        <div>Welcome to my project 🫶🏻</div>
-      </Layout>
+      <div>Welcome to my project 🫶🏻</div>
     </>
   );
-}
+};
+
+Home.getLayout = function getLayout(page: React.ReactElement) {
+  return <Layout>{page}</Layout>;
+};
+
+export default Home;

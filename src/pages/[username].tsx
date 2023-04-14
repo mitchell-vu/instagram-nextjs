@@ -1,17 +1,19 @@
 import { Layout } from '@/components';
+import TabNavigation from '@/components/TabNavigation/TabNavigation';
 import { auth } from '@/config/firebase';
 import Head from 'next/head';
 import Image from 'next/image';
 import * as React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { NextPageWithLayout } from './_app';
 
 interface IProfileProps {}
 
-const Profile: React.FunctionComponent<IProfileProps> = () => {
+const Profile: NextPageWithLayout<IProfileProps> = () => {
   const [loggedInUser] = useAuthState(auth);
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>{loggedInUser?.displayName} | Instagram</title>
       </Head>
@@ -26,7 +28,7 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
               <div className="relative flex flex-grow justify-center">
                 <div className="relative">
                   <Image
-                    src="https://instagram.fhan19-1.fna.fbcdn.net/v/t51.2885-19/340006043_176949998552507_4553709423859098329_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fhan19-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=CTgGBr1hnQUAX-3EzW1&edm=AAAAAAABAAAA&ccb=7-5&oh=00_AfBHlT63tLyIOVxv5D9AG_KgY0Cqkxzzr02vPkYcuAKhsw&oe=6438A086&_nc_sid=022a36"
+                    src="https://instagram.fhan5-11.fna.fbcdn.net/v/t51.2885-19/341338122_620645192828655_6495014313330276964_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fhan5-11.fna.fbcdn.net&_nc_cat=103&_nc_ohc=NfmaIOYoShkAX-rLG2u&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfC09e84nRgjhFi9ZdevMKqPAQAB7mYAQHN-6b_OSF9clA&oe=643DEEF1&_nc_sid=8fd12b"
                     width={150}
                     height={150}
                     className="rounded-full bg-black"
@@ -68,6 +70,8 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
               </section>
             </header>
 
+            <TabNavigation />
+
             <div className="grid grid-cols-3 gap-1">
               {[
                 'https://scontent-tpe1-1.cdninstagram.com/v/t51.2885-15/272263498_1514362968961243_6660313042976366365_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent-tpe1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=re_3-jGE3PsAX_s9000&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=Mjc1NzY2NTc2MDAxOTgwNDY4NQ%3D%3D.2-ccb7-5&oh=00_AfCjXvuU1C51gt_4vgAOOz-DjhdA28zQYdKzixGff-jsGA&oe=643C196D&_nc_sid=1527a3',
@@ -94,8 +98,12 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
+};
+
+Profile.getLayout = function getLayout(page: React.ReactElement) {
+  return <Layout>{page}</Layout>;
 };
 
 export default Profile;

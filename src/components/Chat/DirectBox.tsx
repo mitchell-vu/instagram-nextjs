@@ -15,7 +15,7 @@ interface IDirectBoxProps {
   directNull?: boolean;
 }
 
-const DirectBox: React.FunctionComponent<IDirectBoxProps> = ({ children, directNull }) => {
+const DirectBox: React.FC<IDirectBoxProps> = ({ children, directNull }) => {
   const router = useRouter();
 
   const [loggedInUser] = useAuthState(auth);
