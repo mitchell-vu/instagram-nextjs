@@ -24,14 +24,14 @@ const TabNavigation: React.FC<ITabNavigationProps> = () => {
             // href={`/mit.chell.vu/${item.href}`}
             key={index}
             className={classNames(
-              'mr-16 flex h-12 flex-row items-center justify-center gap-2 last:mr-0',
+              'mr-[60px] flex h-12 flex-row items-center justify-center gap-[6px] last:mr-0 active:opacity-50',
               { 'fill-gray-500 text-gray-500': index !== activeTab },
               { '-mt-[1px] border-t border-t-black fill-black text-black': index === activeTab },
             )}
             onClick={() => setActiveTab(index)}
           >
             {item.icon}
-            <span className="text-xs font-semibold uppercase">{item.label}</span>
+            <span className="text-xs font-semibold uppercase tracking-[1px]">{item.label}</span>
           </div>
         ))}
       </div>

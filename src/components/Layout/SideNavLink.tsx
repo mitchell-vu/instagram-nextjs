@@ -21,7 +21,7 @@ const SideNavLink: React.FC<ISideNavLinkProps> = ({ link, isActive, isModalOpen 
   const linkContent = (
     <div
       className={classNames(
-        'group my-0.5 flex w-full flex-row items-center gap-4 rounded-lg p-3 transition',
+        'group my-0.5 flex w-full flex-row items-center gap-4 rounded-lg p-[11px] transition',
         'border hover:bg-neutral-100 active:opacity-50',
         { 'border-transparent': !link.isActive },
         { 'border-gray-200': link.isActive },

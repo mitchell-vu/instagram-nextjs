@@ -5,7 +5,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import * as React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../_app';
+import { PlusSvg, SettingsSvg } from '@/assets/svg';
 
 interface IProfileProps {}
 
@@ -24,8 +25,8 @@ const Profile: NextPageWithLayout<IProfileProps> = () => {
           style={{ width: 'calc(100% - 40px)' }}
         >
           <div className="flex grow flex-col">
-            <header className="mb-16 flex flex-row items-stretch gap-8">
-              <div className="relative flex flex-grow justify-center">
+            <header className="mb-12 flex flex-row items-stretch">
+              <div className="relative mr-[30px] flex flex-shrink-0 grow flex-col items-center justify-center">
                 <div className="relative">
                   <Image
                     src="https://instagram.fhan5-11.fna.fbcdn.net/v/t51.2885-19/341338122_620645192828655_6495014313330276964_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fhan5-11.fna.fbcdn.net&_nc_cat=103&_nc_ohc=NfmaIOYoShkAX-rLG2u&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfC09e84nRgjhFi9ZdevMKqPAQAB7mYAQHN-6b_OSF9clA&oe=643DEEF1&_nc_sid=8fd12b"
@@ -38,15 +39,18 @@ const Profile: NextPageWithLayout<IProfileProps> = () => {
                 </div>
               </div>
 
-              <section className="flex-grow-[2]">
-                <div className="mb-5 flex flex-row gap-5">
-                  <h2 className="text-xl">{loggedInUser?.displayName}</h2>
-                  <button className="h-8 rounded-lg bg-gray-100 px-5 text-sm font-semibold hover:bg-gray-200">
+              <section className="flex flex-shrink flex-grow-[2] flex-col items-stretch">
+                <div className="mb-5 flex flex-row items-center">
+                  <h2 className="text-xl lowercase">{loggedInUser?.displayName}</h2>
+                  <button className="ml-5 h-8 rounded-lg bg-gray-100 px-5 text-sm font-semibold hover:bg-gray-200">
                     Edit profile
+                  </button>
+                  <button className="ml-2 h-10 w-10 p-2">
+                    <SettingsSvg width={24} height={24} />
                   </button>
                 </div>
 
-                <ul className="mb-5 flex flex-row gap-10">
+                <ul className="mb-5 flex flex-row gap-10 leading-tight">
                   {[
                     { unit: 'posts', quantity: 21 },
                     { unit: 'followers', quantity: 636 },
@@ -58,7 +62,7 @@ const Profile: NextPageWithLayout<IProfileProps> = () => {
                   ))}
                 </ul>
 
-                <div className="text-sm">
+                <div className="text-sm leading-tight">
                   <span className="font-semibold">mitchell</span>
                   <span className="text-gray-500"> he/him/they</span>
                   <h1
@@ -69,6 +73,20 @@ const Profile: NextPageWithLayout<IProfileProps> = () => {
                 </div>
               </section>
             </header>
+
+            <div role="menu" className="mb-10">
+              <ul>
+                <li className="flex">
+                  <div role="menuitem" className="flex cursor-pointer flex-col items-center px-4 py-3">
+                    <div className="relative flex h-[77px] w-[77px] items-center justify-center rounded-full bg-gray-50">
+                      <PlusSvg width={44} height={44} className="fill-gray-300" />
+                      <div className="absolute left-0 top-0 h-full w-full scale-110 transform rounded-full border" />
+                    </div>
+                    <div className="truncate pt-3 text-xs font-semibold">New</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
 
             <TabNavigation />
 

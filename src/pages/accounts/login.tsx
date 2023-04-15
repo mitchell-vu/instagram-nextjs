@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { InstagramLogo } from '@/assets/svg';
+import { InstagramTypoLogo } from '@/assets/svg';
 import Link from 'next/link';
 import Head from 'next/head';
 import { auth } from '@/config/firebase';
@@ -50,7 +50,7 @@ const Login: React.FC = () => {
         <div className="my-6 flex max-w-sm grow flex-col items-stretch gap-3">
           <div className="flex flex-col items-center rounded-md border py-2">
             <div className="pb-3 pt-9">
-              <InstagramLogo className="h-14 w-auto" />
+              <InstagramTypoLogo className="h-14 w-auto" />
             </div>
 
             <div className="mb-3 mt-8 w-full">

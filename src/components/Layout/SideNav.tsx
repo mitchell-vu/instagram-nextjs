@@ -127,75 +127,76 @@ const SideNav: React.FC<ISideNavProps> = () => {
 
   return (
     <div className="fixed flex flex-col">
-      <nav
-        className={classNames(
-          'relative z-50 flex h-screen flex-col border-r border-neutral-200 bg-white px-3 pb-5 pt-2',
-          {
-            'w-nav-narrow': isModalOpen,
-            'w-nav-medium 2xl:w-nav-wide': !isModalOpen,
-          },
-        )}
-      >
-        <div className="mb-5 h-[73px]">
-          <Link href="/" className="active:opacity-50" onClick={closeAllModals}>
-            {isModalOpen ? (
-              <div className="pt-3">
-                <div className="group my-1 transform rounded-lg p-3 transition hover:scale-105 hover:bg-neutral-100 active:scale-95 active:opacity-50">
-                  <InstagramLogo />
-                </div>
-              </div>
-            ) : (
-              <div className="mt-2 px-3 pb-3 pt-6">
-                <InstagramTypoLogo />
-              </div>
-            )}
-          </Link>
-        </div>
-
-        <ul className="flex grow flex-col">
-          {NAV_LINKS.map((link, index) => {
-            const isActive =
-              (router.pathname === '/' || link.pathname !== '/') && router.pathname.includes(link.pathname!);
-
-            return (
-              <li key={index}>
-                <SideNavLink link={link} isActive={isActive} isModalOpen={isModalOpen} />
-              </li>
-            );
-          })}
-        </ul>
-
-        <div>
-          <Popover className="relative">
-            {({ open }) => (
-              <>
-                <Popover.Button className="group relative my-0.5 flex w-full flex-row items-center gap-4 rounded-lg p-3 outline-none transition hover:bg-neutral-100 active:opacity-50">
-                  <div className="h-6 w-6 transform transition group-hover:scale-105 group-active:scale-95">
-                    {open ? <HamburgerFillSvg /> : <HamburgerSvg />}
+      <div className="relative z-50">
+        <nav
+          className={classNames(
+            'relative flex h-screen flex-col border-r border-neutral-200 bg-white px-3 pb-5 pt-2 transition-transform',
+            {
+              'w-nav-narrow': isModalOpen,
+              'w-nav-medium 2xl:w-nav-wide': !isModalOpen,
+            },
+          )}
+        >
+          <div className="mb-5 h-[73px] flex-shrink-0">
+            <Link href="/" className="active:opacity-50" onClick={closeAllModals}>
+              {isModalOpen ? (
+                <div className="pt-3">
+                  <div className="group my-1 transform rounded-lg p-3 transition hover:scale-105 hover:bg-neutral-100 active:scale-95 active:opacity-50">
+                    <InstagramLogo />
                   </div>
-                  <div className={classNames({ 'font-bold': open }, { 'opacity-0': isModalOpen })}>More</div>
-                </Popover.Button>
-                <Transition
-                  as={React.Fragment}
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 translate-y-1"
-                  enterTo="opacity-100 translate-y-0"
-                  leave="transition ease-in duration-150"
-                  leaveFrom="opacity-100 translate-y-0"
-                  leaveTo="opacity-0 translate-y-1"
-                >
-                  <Popover.Panel role="dialog" className="absolute bottom-16 z-50 transform">
-                    <ContextMenu />
-                  </Popover.Panel>
-                </Transition>
-              </>
-            )}
-          </Popover>
-        </div>
-      </nav>
+                </div>
+              ) : (
+                <div className="mt-2 px-3 pb-3 pt-6">
+                  <InstagramTypoLogo height={29} width={103} />
+                </div>
+              )}
+            </Link>
+          </div>
 
+          <ul className="flex grow flex-col">
+            {NAV_LINKS.map((link, index) => {
+              const isActive =
+                (router.pathname === '/' || link.pathname !== '/') && router.pathname.includes(link.pathname!);
+
+              return (
+                <li key={index}>
+                  <SideNavLink link={link} isActive={isActive} isModalOpen={isModalOpen} />
+                </li>
+              );
+            })}
+          </ul>
+
+          <div>
+            <Popover className="relative">
+              {({ open }) => (
+                <>
+                  <Popover.Button className="group relative my-0.5 flex w-full flex-row items-center gap-4 rounded-lg p-3 outline-none transition hover:bg-neutral-100 active:opacity-50">
+                    <div className="h-6 w-6 transform transition group-hover:scale-105 group-active:scale-95">
+                      {open ? <HamburgerFillSvg width={24} heigh={24} /> : <HamburgerSvg width={24} heigh={24} />}
+                    </div>
+                    <div className={classNames({ 'font-bold': open }, { 'opacity-0': isModalOpen })}>More</div>
+                  </Popover.Button>
+                  <Transition
+                    as={React.Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="opacity-100 translate-y-0"
+                    leaveTo="opacity-0 translate-y-1"
+                  >
+                    <Popover.Panel role="dialog" className="absolute bottom-16 z-50 transform">
+                      <ContextMenu />
+                    </Popover.Panel>
+                  </Transition>
+                </>
+              )}
+            </Popover>
+          </div>
+        </nav>
+      </div>
       {isNotificationModalOpen && (
-        <SideNavSubPane title="Notification">
+        <SideNavSubPane title="Notifications">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus, nesciunt.
         </SideNavSubPane>
       )}
