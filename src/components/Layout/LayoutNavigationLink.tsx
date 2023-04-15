@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-interface ISideNavLinkProps {
+interface ILayoutNavigationLinkProps {
   link: {
     href?: string;
     label: string;
@@ -11,19 +11,20 @@ interface ISideNavLinkProps {
     onClick?: () => void;
     badge?: boolean | number;
     isActive?: boolean;
+    border?: boolean;
   };
   isActive?: boolean;
   isModalOpen?: boolean;
 }
 
 // TODO: Move to new Icon Button component
-const SideNavLink: React.FC<ISideNavLinkProps> = ({ link, isActive, isModalOpen }) => {
+const LayoutNavigationLink: React.FC<ILayoutNavigationLinkProps> = ({ link, isActive, isModalOpen }) => {
   const linkContent = (
     <div
       className={classNames(
         'group my-0.5 flex w-full flex-row items-center gap-4 rounded-lg p-[11px] transition',
         'border hover:bg-neutral-100 active:opacity-50',
-        { 'border-transparent': !link.isActive },
+        { 'border-transparent': !link.border || !link.isActive },
         { 'border-gray-200': link.isActive },
       )}
     >
@@ -58,4 +59,4 @@ const SideNavLink: React.FC<ISideNavLinkProps> = ({ link, isActive, isModalOpen 
   );
 };
 
-export default SideNavLink;
+export default LayoutNavigationLink;

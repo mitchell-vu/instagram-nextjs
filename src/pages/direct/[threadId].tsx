@@ -4,7 +4,6 @@ import DirectThreadMessages from '@/components/Chat/DirectThread/DirectThreadMes
 import Head from 'next/head';
 import * as React from 'react';
 import { NextPageWithLayout } from '@/pages/_app';
-// import { GetServerSideProps } from 'next';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import { Conversation as IConversation, IMessage } from '@/types';
@@ -48,7 +47,7 @@ const DirectConversation: NextPageWithLayout<IDirectConversationProps> = () => {
 DirectConversation.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <Layout>
-      <div className="flex h-full w-full items-center justify-center p-5">
+      <div className="flex h-screen w-full items-center justify-center p-5">
         <DirectBox>{page}</DirectBox>
       </div>
     </Layout>

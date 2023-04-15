@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import SideNav from './SideNav';
+import LayoutNavigation from './LayoutNavigation';
+import CreatePostModal from '../Modal/CreatePostModal';
 
 interface ILayoutProps {
   children: React.ReactNode;
@@ -8,10 +9,13 @@ interface ILayoutProps {
 
 const Layout: React.FC<ILayoutProps> = ({ children }) => {
   return (
-    <div className="relative flex h-screen w-screen flex-row items-stretch bg-neutral-50">
-      <SideNav />
+    <div className="relative flex flex-row items-stretch bg-neutral-50">
+      <LayoutNavigation />
 
-      <main className="ml-nav-medium flex h-full min-h-screen w-full items-center justify-center overflow-x-hidden">
+      <main
+        role="main"
+        className="ml-nav-medium flex h-full min-h-screen w-full items-center justify-center overflow-x-hidden"
+      >
         {children}
       </main>
     </div>

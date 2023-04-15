@@ -9,16 +9,18 @@ interface IDirectBoxProps {}
 
 const Direct: NextPageWithLayout<IDirectBoxProps> = () => {
   return (
-    <Head>
-      <title>Instagram • Chats</title>
-    </Head>
+    <>
+      <Head>
+        <title>Instagram • Chats</title>
+      </Head>
+    </>
   );
 };
 
 Direct.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <Layout>
-      <div className="flex h-full w-full items-center justify-center p-5">
+      <div className="flex h-screen w-full items-center justify-center p-5">
         <DirectBox directNull={true}>{page}</DirectBox>
       </div>
     </Layout>

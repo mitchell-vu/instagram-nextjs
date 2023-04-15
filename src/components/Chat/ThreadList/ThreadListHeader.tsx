@@ -15,11 +15,11 @@ const ThreadListHeader: React.FC<IThreadListHeaderProps> = ({ onCreateNewThread 
       <div className="basis-8"></div>
       <button className="flex basis-0 flex-row items-center gap-2">
         <div className="truncate whitespace-nowrap font-semibold">{loggedInUser?.displayName}</div>
-        <ChevronUpSvg className="rotate-180 transform" />
+        <ChevronUpSvg className="rotate-180 transform" width={24} height={24} />
       </button>
       <div className="flex-end ml-2 flex basis-8">
         <button onClick={onCreateNewThread}>
-          <PenToSquareSvg />
+          <PenToSquareSvg width={24} height={24} />
         </button>
       </div>
     </header>

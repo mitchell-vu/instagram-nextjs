@@ -5,28 +5,50 @@ import Head from 'next/head';
 import { auth } from '@/config/firebase';
 import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
+import classNames from 'classnames';
 
 interface IInputProps extends React.ComponentPropsWithoutRef<'input'> {
   label: string;
 }
 
 export const Input: React.FC<IInputProps> = ({ label, ...rest }) => {
+  const [value, setValue] = React.useState('');
+  const [type, setType] = React.useState(rest?.type || 'text');
+
+  const togglePassword = () => {
+    setType(type === 'password' ? 'text' : 'password');
+  };
+
   return (
-    <fieldset className="mx-10 mb-1 overflow-hidden rounded border bg-gray-50">
-      <label className="relative flex h-9 w-full">
-        <span className="pointer-events-none absolute left-2 right-0 h-9 w-full truncate align-middle text-xs leading-9 text-gray-500">
+    <fieldset className="mx-10 mb-1 flex flex-row items-center overflow-hidden rounded border bg-gray-50">
+      <label className="relative flex h-9 grow">
+        <span
+          className={classNames(
+            'pointer-events-none absolute left-2 right-0 h-9 w-full origin-left transform transition',
+            'truncate align-middle text-xs leading-9 text-gray-500',
+            { '-translate-y-2 scale-75': value },
+          )}
+        >
           {label}
         </span>
         <input
-          type="text"
-          className="w-full bg-gray-50 p-2 text-xs outline-none"
+          {...rest}
+          type={type}
+          className={classNames('w-full bg-gray-50 p-2 outline-none', { 'pb-0.5 pr-0 pt-[14px] text-xs': value })}
           aria-label={label}
-          aria-required="true"
+          aria-required={rest.required ?? 'false'}
           autoCapitalize="off"
           autoCorrect="off"
-          {...rest}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
         />
       </label>
+
+      {rest.type === 'password' && value && (
+        <button className="ml-2 pr-2 text-sm font-semibold hover:opacity-50 active:opacity-50" onClick={togglePassword}>
+          {type === 'password' ? 'Show' : 'Hide'}
+        </button>
+      )}
     </fieldset>
   );
 };
@@ -55,13 +77,13 @@ const Login: React.FC = () => {
 
             <div className="mb-3 mt-8 w-full">
               <form className="flex w-full flex-col items-stretch" onSubmit={(e) => e.preventDefault()}>
-                <Input name="username" label="Phone number, username, or email" maxLength={75} />
-                <Input type="password" name="password" label="Password" />
+                <Input name="username" label="Phone number, username, or email" maxLength={75} required />
+                <Input type="password" name="password" label="Password" required />
 
                 <div className="mx-10 my-2">
                   <button
                     type="submit"
-                    className="w-full rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white disabled:opacity-70"
+                    className="w-full rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white enabled:hover:bg-sky-600 disabled:opacity-70"
                   >
                     Log in
                   </button>

@@ -7,7 +7,7 @@ interface IDirectNullProps {
 
 const DirectNull: React.FC<IDirectNullProps> = ({ onCreateNewThread }) => {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-full w-full flex-col items-center justify-center text-center">
       <DirectSvg className="h-24 w-24" />
 
       <span className="mt-4 text-xl">Your Messages</span>

@@ -24,7 +24,7 @@ const ThreadHeader: React.FC<IThreadHeaderProps> = ({ recipient, recipientEmail 
           <div className="font-semibold">{recipient?.email ?? recipientEmail}</div>
         </div>
         <button className="p-2">
-          <InfoSvg aria-label="View Thread Details" className="h-6 w-6" />
+          <InfoSvg aria-label="View Thread Details" height={24} width={24} />
         </button>
       </div>
     </header>

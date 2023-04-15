@@ -6,10 +6,10 @@ import * as React from 'react';
 interface ITabNavigationProps {}
 
 const NAV = [
-  { href: '/', label: 'Posts', icon: <GridSvg /> },
-  { href: '/saved', label: 'Reels', icon: <VideoPlaySvg /> },
-  { href: '/reels', label: 'Saved', icon: <BookmarkSvg /> },
-  { href: '/tagged', label: 'Tagged', icon: <TaggedSvg /> },
+  { href: '/', label: 'Posts', icon: <GridSvg width={12} height={12} /> },
+  { href: '/saved', label: 'Reels', icon: <VideoPlaySvg width={12} height={12} /> },
+  { href: '/reels', label: 'Saved', icon: <BookmarkSvg width={12} height={12} /> },
+  { href: '/tagged', label: 'Tagged', icon: <TaggedSvg width={12} height={12} /> },
 ];
 
 const TabNavigation: React.FC<ITabNavigationProps> = () => {
@@ -30,7 +30,7 @@ const TabNavigation: React.FC<ITabNavigationProps> = () => {
             )}
             onClick={() => setActiveTab(index)}
           >
-            {item.icon}
+            <div className="flex-shrink-0">{item.icon}</div>
             <span className="text-xs font-semibold uppercase tracking-[1px]">{item.label}</span>
           </div>
         ))}

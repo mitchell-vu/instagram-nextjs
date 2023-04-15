@@ -24,16 +24,18 @@ import {
 import { auth } from '@/config/firebase';
 import Image from 'next/image';
 import ContextMenu from './ContextMenu';
-import SideNavLink from './SideNavLink';
-import SideNavSubPane from './SideNavSubPane';
+import LayoutNavigationLink from './LayoutNavigationLink';
+import LayoutNavigationSubPane from './LayoutNavigationSubPane';
+import CreatePostModal from '../Modal/CreatePostModal';
 
-interface ISideNavProps {}
+interface ILayoutNavigationProps {}
 
-const SideNav: React.FC<ISideNavProps> = () => {
+const LayoutNavigation: React.FC<ILayoutNavigationProps> = () => {
   const router = useRouter();
   const [loggedInUser] = useAuthState(auth);
   const [isNotificationModalOpen, setIsNotificationModalOpen] = React.useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = React.useState(false);
+  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = React.useState(false);
 
   const NAV_LINKS = React.useMemo(
     () => [
@@ -56,6 +58,7 @@ const SideNav: React.FC<ISideNavProps> = () => {
           setIsSearchModalOpen((currState) => !currState);
         },
         isActive: isSearchModalOpen,
+        border: true,
       },
       {
         href: '/direct',
@@ -78,12 +81,18 @@ const SideNav: React.FC<ISideNavProps> = () => {
           setIsNotificationModalOpen((currState) => !currState);
         },
         isActive: isNotificationModalOpen,
+        border: true,
       },
       {
         label: 'Create',
         icon: <SquarePlusSvg />,
         activeIcon: <SquarePlusFillSvg />,
-        onClick: () => closeAllModals(),
+        onClick: () => {
+          closeAllModals();
+          setIsCreatePostModalOpen(true);
+        },
+        isActive: isCreatePostModalOpen,
+        border: false,
       },
       {
         href: `/${loggedInUser?.email}`,
@@ -115,7 +124,7 @@ const SideNav: React.FC<ISideNavProps> = () => {
         onClick: () => closeAllModals(),
       },
     ],
-    [loggedInUser, isNotificationModalOpen, isSearchModalOpen],
+    [loggedInUser, isNotificationModalOpen, isSearchModalOpen, isCreatePostModalOpen],
   );
 
   const isModalOpen = isNotificationModalOpen || isSearchModalOpen;
@@ -160,7 +169,7 @@ const SideNav: React.FC<ISideNavProps> = () => {
 
               return (
                 <li key={index}>
-                  <SideNavLink link={link} isActive={isActive} isModalOpen={isModalOpen} />
+                  <LayoutNavigationLink link={link} isActive={isActive} isModalOpen={isModalOpen} />
                 </li>
               );
             })}
@@ -196,17 +205,19 @@ const SideNav: React.FC<ISideNavProps> = () => {
         </nav>
       </div>
       {isNotificationModalOpen && (
-        <SideNavSubPane title="Notifications">
+        <LayoutNavigationSubPane title="Notifications">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus, nesciunt.
-        </SideNavSubPane>
+        </LayoutNavigationSubPane>
       )}
       {isSearchModalOpen && (
-        <SideNavSubPane title="Search">
+        <LayoutNavigationSubPane title="Search">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus, nesciunt.
-        </SideNavSubPane>
+        </LayoutNavigationSubPane>
       )}
+
+      <CreatePostModal isOpen={isCreatePostModalOpen} onClose={() => setIsCreatePostModalOpen(false)} />
     </div>
   );
 };
 
-export default SideNav;
+export default LayoutNavigation;
