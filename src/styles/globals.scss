@@ -1,3 +1,4 @@
+@import 'nprogress/nprogress.css';
 @import './layout.scss';
 
 @tailwind base;
@@ -20,4 +21,40 @@ body {
   color: theme('colors.neutral.800');
 }
 
-// background-image: linear-gradient(to right,rgb(var(--gradient-purple)),rgb(var(--gradient-yellow)),rgb(var(--gradient-orange)),rgb(var(--gradient-pink)),rgb(var(--gradient-lavender)),rgb(var(--gradient-purple)),rgb(var(--gradient-yellow)));
+#nprogress {
+  .bar {
+    height: 3px !important;
+    will-change: transform;
+
+    &-inner {
+      background-image: linear-gradient(
+        to right,
+        rgb(118, 56, 250),
+        rgb(255, 214, 0),
+        rgb(255, 122, 0),
+        rgb(255, 1, 105),
+        rgb(211, 0, 197),
+        rgb(118, 56, 250),
+        rgb(255, 214, 0)
+      ) !important;
+      height: 3px !important;
+
+      transform-origin: right;
+      will-change: transform;
+      animation-name: progressbar-gradident;
+      animation-duration: 2s;
+      animation-delay: 0s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+@keyframes progressbar-gradident {
+  0% {
+    transform: translateX(0) scaleX(6);
+  }
+  100% {
+    transform: translateX(500%) scaleX(6);
+  }
+}

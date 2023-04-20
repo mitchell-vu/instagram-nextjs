@@ -17,7 +17,7 @@ const Home: NextPageWithLayout = () => {
 
       <div className="flex min-h-screen w-full flex-col bg-white">
         <div className="mx-auto flex w-full flex-row pt-1" style={{ maxWidth: 1013 }}>
-          <div className="mr-16 mt-10 w-full max-w-[630px] flex-shrink-0">
+          <div className="mr-16 mt-10 w-full max-w-[630px] shrink-0">
             <div className="mx-auto max-w-[470px]">
               <Post />
               <Post />
@@ -25,7 +25,7 @@ const Home: NextPageWithLayout = () => {
             </div>
           </div>
 
-          <div className="w-[319px] flex-shrink-0">
+          <div className="w-[319px] shrink-0">
             <div className="mb-8 pt-8">
               <div className="mb-3 mt-4 flex cursor-pointer flex-row items-center gap-4">
                 <Link href={`/mitchell.vu`} className="relative h-14 w-14">

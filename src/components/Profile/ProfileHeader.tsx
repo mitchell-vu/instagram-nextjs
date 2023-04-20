@@ -11,7 +11,7 @@ const ProfileHeader: React.FunctionComponent<IProfileHeaderProps> = (props) => {
 
   return (
     <header className="mb-12 flex flex-row items-stretch">
-      <div className="relative mr-[30px] flex flex-shrink-0 grow flex-col items-center justify-center">
+      <div className="relative mr-[30px] flex shrink-0 grow flex-col items-center justify-center">
         <div className="relative">
           <Image
             src="https://instagram.fhan5-11.fna.fbcdn.net/v/t51.2885-19/341338122_620645192828655_6495014313330276964_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fhan5-11.fna.fbcdn.net&_nc_cat=103&_nc_ohc=NfmaIOYoShkAX-rLG2u&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfC09e84nRgjhFi9ZdevMKqPAQAB7mYAQHN-6b_OSF9clA&oe=643DEEF1&_nc_sid=8fd12b"

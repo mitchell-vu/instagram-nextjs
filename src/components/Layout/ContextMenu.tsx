@@ -41,13 +41,13 @@ const ContextMenu: React.FC<IContextMenuProps> = () => {
         {[
           {
             label: 'Settings',
-            icon: <SettingsSvg className="mr-3 flex-shrink-0" width={18} height={18} />,
+            icon: <SettingsSvg className="mr-3 shrink-0" width={18} height={18} />,
             extend: true,
             onClick: () => {},
           },
           {
             label: 'Switch appearance',
-            icon: <SunSvg className="mr-3 flex-shrink-0" width={18} height={18} />,
+            icon: <SunSvg className="mr-3 shrink-0" width={18} height={18} />,
             extend: true,
             onClick: () => {},
           },

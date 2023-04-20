@@ -30,7 +30,7 @@ const TabNavigation: React.FC<ITabNavigationProps> = () => {
             )}
             onClick={() => setActiveTab(index)}
           >
-            <div className="flex-shrink-0">{item.icon}</div>
+            <div className="shrink-0">{item.icon}</div>
             <span className="text-xs font-semibold uppercase tracking-[1px]">{item.label}</span>
           </div>
         ))}

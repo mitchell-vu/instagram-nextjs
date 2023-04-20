@@ -2,16 +2,45 @@ import { Dialog, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import * as React from 'react';
 
-interface IBaseModelProps extends React.ComponentPropsWithoutRef<'div'> {
+interface IBaseDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
   children?: React.ReactNode;
-  rightBtn?: React.ReactNode;
-  leftBtn?: React.ReactNode;
 }
 
-const BaseModal: React.FC<IBaseModelProps> = ({ isOpen, onClose, title, rightBtn, leftBtn, children, ...rest }) => {
+interface IButtonProps extends React.ComponentPropsWithoutRef<'button'> {
+  children: React.ReactNode;
+}
+
+type BaseDialogSubComponents = {
+  Title: typeof Title;
+  Button: typeof Button;
+};
+
+const Title = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Dialog.Title as="header" className="relative m-8 mb-4 h-[44px] text-center leading-tight">
+      {children}
+    </Dialog.Title>
+  );
+};
+
+const Button: React.FC<IButtonProps> = ({ children, ...rest }) => {
+  return (
+    <button {...rest} className={classNames('min-h-[48px] border-t px-2 py-1 active:bg-gray-200', rest.className)}>
+      {children}
+    </button>
+  );
+};
+
+// TODO: Fix this hacky code of TypeScript
+const BaseDialog: React.FC<IBaseDialogProps> & BaseDialogSubComponents = ({ isOpen, onClose, children }) => {
+  // @ts-ignore
+  const { Title } = Object.keys(BaseDialog).map((key) => {
+    // @ts-ignore
+    return React.Children.map(children, (child) => ((child as React.ReactElement)?.type.name === key ? child : null));
+  });
+
   return (
     <Transition appear show={isOpen} as={React.Fragment}>
       <Dialog as="div" onClose={onClose}>
@@ -38,19 +67,8 @@ const BaseModal: React.FC<IBaseModelProps> = ({ isOpen, onClose, title, rightBtn
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel
-                className={classNames(
-                  'm-5 flex w-full max-w-md transform flex-col overflow-hidden rounded-xl bg-white text-left align-middle shadow-xl transition-all',
-                  rest.className,
-                )}
-              >
-                <Dialog.Title as="header" className="relative h-[44px] border-b font-medium leading-6 text-gray-900">
-                  <div className="relative z-10 float-left h-full">{rightBtn}</div>
-                  <h1 className="absolute flex h-full w-full items-center justify-center font-semibold">
-                    <div>{title}</div>
-                  </h1>
-                  <div className="relative z-10 float-right h-full">{leftBtn}</div>
-                </Dialog.Title>
+              <Dialog.Panel className="m-5 flex w-full max-w-sm transform flex-col overflow-hidden rounded-xl bg-white text-left align-middle shadow-xl transition-all">
+                {Title}
 
                 {children}
               </Dialog.Panel>
@@ -62,4 +80,7 @@ const BaseModal: React.FC<IBaseModelProps> = ({ isOpen, onClose, title, rightBtn
   );
 };
 
-export default BaseModal;
+BaseDialog.Title = Title;
+BaseDialog.Button = Button;
+
+export default BaseDialog;

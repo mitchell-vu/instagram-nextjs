@@ -12,9 +12,11 @@ const useAutosizeTextArea = (
   maxRow?: number,
 ) => {
   useEffect(() => {
+    console.log(textAreaRef);
+    
     if (textAreaRef) {
       // We need to reset the height momentarily to get the correct scrollHeight for the textarea
-      textAreaRef.style.height = '0px';
+      textAreaRef.style.height = `${baseHeight}px`;
       let scrollHeight = textAreaRef.scrollHeight;
 
       if (baseHeight) {
@@ -26,7 +28,7 @@ const useAutosizeTextArea = (
       // Trying to set this with state or a ref will produce an incorrect value.
       textAreaRef.style.height = scrollHeight + 'px';
     }
-  }, [textAreaRef, value, baseHeight, maxRow]);
+  }, [textAreaRef?.value, value, baseHeight, maxRow]);
 };
 
 export default useAutosizeTextArea;

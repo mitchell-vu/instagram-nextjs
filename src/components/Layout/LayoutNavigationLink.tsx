@@ -22,19 +22,19 @@ const LayoutNavigationLink: React.FC<ILayoutNavigationLinkProps> = ({ link, isAc
   const linkContent = (
     <div
       className={classNames(
-        'group my-0.5 flex w-full flex-row items-center gap-4 rounded-lg p-[11px] transition',
+        'group my-1 flex w-full flex-row items-center gap-4 rounded-lg p-[11px] transition',
         'border hover:bg-neutral-100 active:opacity-50',
         { 'border-transparent': !link.border || !link.isActive },
         { 'border-gray-200': link.isActive },
       )}
     >
-      <div className="h-6 w-6 flex-shrink-0 transform transition group-hover:scale-105 group-active:scale-95">
+      <div className="h-6 w-6 shrink-0 transform transition group-hover:scale-105 group-active:scale-95">
         {link.badge && (
           <div
             className={classNames(
               'absolute box-content rounded-full border-[1.5px] border-white bg-red-500',
               { '-right-0.5 top-0 h-2 w-2 items-center justify-center': typeof link.badge !== 'number' },
-              { ' -right-2 -top-2 flex h-4 w-4 items-center justify-center': typeof link.badge === 'number' },
+              { ' -right-2 -top-2 flex h-[18px] w-[18px] items-center justify-center': typeof link.badge === 'number' },
             )}
           >
             {typeof link.badge === 'number' && (

@@ -20,9 +20,10 @@ const StatsOverlay: React.FC = () => {
 
 interface IPostGridItemProps {
   url: string;
+  onClick?: () => void;
 }
 
-const PostGridItem: React.FC<IPostGridItemProps> = ({ url }) => {
+const PostGridItem: React.FC<IPostGridItemProps> = ({ url, onClick }) => {
   const postRef = React.useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = React.useState(false);
 
@@ -49,7 +50,7 @@ const PostGridItem: React.FC<IPostGridItemProps> = ({ url }) => {
   };
 
   return (
-    <div ref={postRef} className="relative aspect-square w-full cursor-pointer">
+    <div ref={postRef} className="relative aspect-square w-full cursor-pointer active:opacity-50" onClick={onClick}>
       <Image
         src={url}
         width={300}

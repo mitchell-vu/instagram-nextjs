@@ -1,11 +1,14 @@
 import { Popover, Transition } from '@headlessui/react';
 import classNames from 'classnames';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import {
+  CompassFillSvg,
+  CompassSvg,
   HamburgerFillSvg,
   HamburgerSvg,
   HeartFillSvg,
@@ -20,13 +23,14 @@ import {
   SearchSvg,
   SquarePlusFillSvg,
   SquarePlusSvg,
+  VideoPlayFillSvg,
+  VideoPlaySvg,
 } from '@/assets/svg';
 import { auth } from '@/config/firebase';
-import Image from 'next/image';
+import CreationModal from '../Modal/CreationModal/CreationModal';
 import ContextMenu from './ContextMenu';
 import LayoutNavigationLink from './LayoutNavigationLink';
 import LayoutNavigationSubPane from './LayoutNavigationSubPane';
-import CreatePostModal from '../Modal/CreatePostModal';
 
 interface ILayoutNavigationProps {}
 
@@ -59,6 +63,20 @@ const LayoutNavigation: React.FC<ILayoutNavigationProps> = () => {
         },
         isActive: isSearchModalOpen,
         border: true,
+      },
+      {
+        href: '/explore',
+        pathname: '/explore',
+        label: 'Explore',
+        icon: <CompassSvg />,
+        activeIcon: <CompassFillSvg />,
+      },
+      {
+        href: '/reels',
+        pathname: '/reels',
+        label: 'Reels',
+        icon: <VideoPlaySvg />,
+        activeIcon: <VideoPlayFillSvg />,
       },
       {
         href: '/direct',
@@ -99,7 +117,7 @@ const LayoutNavigation: React.FC<ILayoutNavigationProps> = () => {
         label: 'Profile',
         pathname: '/[username]',
         icon: (
-          <div className="relative flex-shrink-0">
+          <div className="relative shrink-0">
             <Image
               src={loggedInUser?.photoURL!}
               alt={loggedInUser?.displayName!}
@@ -110,7 +128,7 @@ const LayoutNavigation: React.FC<ILayoutNavigationProps> = () => {
           </div>
         ),
         activeIcon: (
-          <div className="relative flex-shrink-0">
+          <div className="relative shrink-0">
             <div className="absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 transform rounded-full border-2 border-black" />
             <Image
               src={loggedInUser?.photoURL!}
@@ -135,8 +153,8 @@ const LayoutNavigation: React.FC<ILayoutNavigationProps> = () => {
   };
 
   return (
-    <div className="fixed flex flex-col">
-      <div className="relative z-50">
+    <div className="fixed z-[100] flex flex-col">
+      <div className="relative z-20">
         <nav
           className={classNames(
             'relative flex h-screen flex-col border-r border-neutral-200 bg-white px-3 pb-5 pt-2 transition-transform',
@@ -146,7 +164,7 @@ const LayoutNavigation: React.FC<ILayoutNavigationProps> = () => {
             },
           )}
         >
-          <div className="mb-5 h-[73px] flex-shrink-0">
+          <div className="mb-5 h-[73px] shrink-0">
             <Link href="/" className="active:opacity-50" onClick={closeAllModals}>
               {isModalOpen ? (
                 <div className="pt-3">
@@ -204,18 +222,20 @@ const LayoutNavigation: React.FC<ILayoutNavigationProps> = () => {
           </div>
         </nav>
       </div>
+
       {isNotificationModalOpen && (
         <LayoutNavigationSubPane title="Notifications">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus, nesciunt.
         </LayoutNavigationSubPane>
       )}
+
       {isSearchModalOpen && (
         <LayoutNavigationSubPane title="Search">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus, nesciunt.
         </LayoutNavigationSubPane>
       )}
 
-      <CreatePostModal isOpen={isCreatePostModalOpen} onClose={() => setIsCreatePostModalOpen(false)} />
+      <CreationModal isOpen={isCreatePostModalOpen} onClose={() => setIsCreatePostModalOpen(false)} />
     </div>
   );
 };

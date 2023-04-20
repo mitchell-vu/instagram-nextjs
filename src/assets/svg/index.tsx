@@ -1,7 +1,10 @@
+export { default as ArrowLeftSvg } from './arrow-left.svg';
 export { default as BookmarkSvg } from './bookmark.svg';
 export { default as ChevronUpSvg } from './chevron-up.svg';
 export { default as CommentFillSvg } from './comment-fill.svg';
 export { default as CommentSvg } from './comment.svg';
+export { default as CompassFillSvg } from './compass-fill.svg';
+export { default as CompassSvg } from './compass.svg';
 export { default as DirectSvg } from './direct.svg';
 export { default as ThreeDotsSvg } from './dots.svg';
 export { default as EmojiSvg } from './emoji.svg';
@@ -31,5 +34,5 @@ export { default as SquarePlusSvg } from './square-plus.svg';
 export { default as SunSvg } from './sun.svg';
 export { default as TaggedSvg } from './tagged.svg';
 export { default as VideoPlaySvg } from './video-play.svg';
+export { default as VideoPlayFillSvg } from './video-play-fill.svg';
 export { default as XMarkSvg } from './x-mark.svg';
-
